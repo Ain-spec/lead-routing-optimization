@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Methodology & Analysis - BD-Sales Pairing Optimization</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #00a8cc;
+            --success: #2f855a;
+            --warning: #d69e2e;
+            --danger: #c53030;
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+            --bg-card: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .navbar h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 500;
+            transition: opacity 0.3s;
+            font-size: 15px;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .hero {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--accent);
+        }
+        
+        .hero h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            color: var(--text-light);
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .section-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .section-header h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .section-header p {
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 15px;
+        }
+        
+        .chart-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .chart-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .methodology-box {
+            background: #e6f7ff;
+            border-left: 4px solid var(--accent);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        
+        .methodology-box h4 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .methodology-box ol, .methodology-box ul {
+            margin-left: 20px;
+            color: var(--text-dark);
+            line-height: 1.9;
+        }
+        
+        .methodology-box li {
+            margin-bottom: 10px;
+        }
+        
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .metric-card {
+            background: #f8f9fa;
+            border-left: 3px solid var(--accent);
+            padding: 20px;
+            border-radius: 4px;
+        }
+        
+        .metric-card h5 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .metric-card p {
+            color: var(--text-dark);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e6f7ff 0%, #b3e0ff 100%);
+            border: 2px solid var(--accent);
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        
+        .highlight-box h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .insights-box {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .insights-box h4 {
+            color: var(--success);
+            margin-bottom: 12px;
+            font-size: 18px;
+        }
+        
+        .insights-box ul {
+            list-style-position: inside;
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+        
+        .insights-box li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Dashboard 2: Methodology & Performance Analysis</h1>
+        <div class="nav-links">
+            <a href="dashboard_index.html">Home</a>
+            <a href="dashboard_1_eda.html">EDA</a>
+            <a href="dashboard_2_methodology.html">Methodology</a>
+            <a href="dashboard_3_recommendations.html">Recommendations</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        
+        <div class="hero">
+            <h2>Phase 2: Building the Analytical Framework</h2>
+            <p>After exploring the data, I developed a scoring methodology that fairly compares BD-Sales pairings while accounting for inherent lead quality differences. This phase defines the metrics, establishes baseline comparisons, and classifies performance.</p>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>Step 1: Metric Selection</h3>
+                <p>After evaluating multiple candidates, four key metrics were selected for analysis</p>
+            </div>
+            
+            <div class="methodology-box">
+                <h4>Selection Criteria</h4>
+                <p>Metrics needed to be: (1) Actionable - can we change behavior?, (2) Measurable - reliable calculation from data, (3) Impactful - correlates with revenue, and (4) Independent - provides unique information</p>
+            </div>
+            
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <h5>1. Win Rate (25% weight)</h5>
+                    <p><strong>Definition:</strong> % of decided opportunities (Won or Lost) that closed won</p>
+                    <p><strong>Why included:</strong> Direct measure of conversion success</p>
+                </div>
+                
+                <div class="metric-card">
+                    <h5>2. Early Death Rate (25% weight)</h5>
+                    <p><strong>Definition:</strong> % of lost opportunities that died within 14 days</p>
+                    <p><strong>Why included:</strong> Indicates lead qualification quality (lower is better)</p>
+                </div>
+                
+                <div class="metric-card">
+                    <h5>3. Stale Pipeline Rate (25% weight)</h5>
+                    <p><strong>Definition:</strong> % of open deals inactive for 90+ days</p>
+                    <p><strong>Why included:</strong> Measures deal momentum and pipeline health (lower is better)</p>
+                </div>
+                
+                <div class="metric-card">
+                    <h5>4. Average Deal Size (25% weight)</h5>
+                    <p><strong>Definition:</strong> Mean deal value across all opportunities</p>
+                    <p><strong>Why included:</strong> Revenue impact per opportunity (higher is better)</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>Step 2: BD Baseline Methodology</h3>
+                <p>The critical decision: How do we fairly compare pairings when different BDs pass different quality leads?</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🎯 Key Insight: BD Baseline Comparison</h4>
+                <p style="margin-bottom: 15px;">Each BD-Sales pair is compared to <strong>THAT BD's average performance</strong> (not the company-wide average).</p>
+                <p style="margin-bottom: 15px;"><strong>Why this matters:</strong> Different BDs pass different quality/difficulty leads. Enterprise BDs naturally have lower win rates than SMB BDs. Comparing to BD's baseline controls for this, making comparisons fair.</p>
+                <p><strong>Example:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>BD_003 (Enterprise) average: 18% win rate</li>
+                    <li>BD_003 → SR_007: 25% win rate</li>
+                    <li>Percentage deviation: (25-18)/18 × 100 = <strong>+38.9%</strong></li>
+                    <li>Interpretation: "SR_007 performs 39% BETTER than expected with BD_003's difficult leads"</li>
+                </ul>
+            </div>
+            
+            <div class="methodology-box">
+                <h4>How BD Baseline Normalizes for Quality</h4>
+                <ol>
+                    <li><strong>Calculate each BD's average</strong> across all metrics (win rate, early death, stale pipeline, deal size)</li>
+                    <li><strong>Compare each pair to THEIR BD's average</strong> using percentage deviation: ((Pair - BD Avg) / BD Avg) × 100</li>
+                    <li><strong>Apply directionality:</strong> Early Death and Stale Pipeline are inverted (lower is better)</li>
+                    <li><strong>Weight equally:</strong> Each metric contributes 25% to final score</li>
+                    <li><strong>Apply confidence multiplier:</strong> Based on opportunity count (full confidence at 7+ opps)</li>
+                </ol>
+            </div>
+            
+            <div style="background: #fff3cd; border-left: 4px solid var(--warning); padding: 20px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="color: #856404; margin-bottom: 12px;">Why Percentage Deviation = Normalization</h4>
+                <p style="color: #856404; line-height: 1.8;">
+                    Percentage deviation accounts for baseline difficulty. A Sales Rep who performs +30% above baseline is impressive whether that baseline is 18% (hard leads) or 32% (easy leads). The percentage normalizes for difficulty level, making scores comparable across different BD lead sources.
+                </p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>Step 3: Two-Level Classification System</h3>
+                <p>Scores are used at TWO different levels for different purposes</p>
+            </div>
+            
+            <div class="highlight-box">
+                <h4>🎯 Understanding the Two Levels</h4>
+                <div style="margin-top: 20px;">
+                    <p style="margin-bottom: 15px;"><strong>LEVEL 1: BD-Specific Rankings (For Routing)</strong></p>
+                    <ul style="margin-left: 20px; margin-bottom: 20px;">
+                        <li>Purpose: Make routing decisions for each BD's leads</li>
+                        <li>Method: Rank ALL pairs within each BD, identify top 5 and bottom 5</li>
+                        <li>Output: "Route BD_003's leads to SR_014, SR_006, SR_011..." (actionable routing rules)</li>
+                        <li>Use case: Operational - which sales rep should get this lead?</li>
+                    </ul>
+                    
+                    <p style="margin-bottom: 15px;"><strong>LEVEL 2: Population Classification (For Context)</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Purpose: Understand overall pairing quality across company</li>
+                        <li>Method: Calculate percentiles across ALL pairs (after normalization)</li>
+                        <li>Output: "High Performer" (75th percentile+), "At-Risk" (10th percentile-), etc.</li>
+                        <li>Use case: Strategic - which BDs have stronger pairing options overall?</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="methodology-box">
+                <h4>Percentile-Based Classification Thresholds</h4>
+                <ul>
+                    <li><strong>High Performer:</strong> ≥ 75th percentile (top 25% of all pairs)</li>
+                    <li><strong>Above Average:</strong> 50th - 75th percentile</li>
+                    <li><strong>Average:</strong> 25th - 50th percentile</li>
+                    <li><strong>Below Average:</strong> 10th - 25th percentile</li>
+                    <li><strong>At-Risk:</strong> < 10th percentile (bottom 10%)</li>
+                </ul>
+                <p style="margin-top: 15px; font-style: italic;">Why percentiles? Data-driven (not arbitrary), adaptive to score distribution, and easily explainable to stakeholders.</p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>Performance Score Distribution</h3>
+                <p>After normalization and weighting, how do pairings score?</p>
+            </div>
+            
+            <div class="chart-container">
+                <img src="visualizations/output/01_final_score_distribution.png" alt="Performance Score Distribution">
+            </div>
+            
+            <div class="insights-box">
+                <h4>Key Insights</h4>
+                <ul>
+                    <li><strong>Clear separation</strong> between high performers (75th+ percentile) and at-risk pairs (10th- percentile)</li>
+                    <li><strong>Normal distribution</strong> indicates healthy performance variance (not all pairs identical)</li>
+                    <li><strong>Percentile thresholds</strong> create objective classification zones (data-driven, not arbitrary)</li>
+                    <li><strong>Population classification</strong> shows overall quality after controlling for BD lead difficulty</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>Top Performers vs At-Risk Pairs</h3>
+                <p>Identifying the best and worst BD-Sales combinations</p>
+            </div>
+            
+            <div class="chart-container">
+                <img src="visualizations/output/03_top_bottom_pairs.png" alt="Top Bottom Pairs">
+            </div>
+            
+            <div class="insights-box">
+                <h4>Key Insights</h4>
+                <ul>
+                    <li><strong>Performance range spans 100+ points:</strong> Clear difference between optimal and poor pairings</li>
+                    <li><strong>Top performers consistently score 40+:</strong> Strong pairing chemistry across multiple metrics</li>
+                    <li><strong>At-risk pairs score -60 or lower:</strong> Fundamental misalignment across metrics</li>
+                    <li><strong>These represent population classification:</strong> Best/worst relative to ALL pairs after normalization</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>Performance Heatmap: Complete Pairing Matrix</h3>
+                <p>Visual overview of all BD-Sales combinations</p>
+            </div>
+            
+            <div class="chart-container">
+                <img src="visualizations/output/04_performance_heatmap.png" alt="Performance Heatmap">
+            </div>
+            
+            <div class="insights-box">
+                <h4>Key Insights</h4>
+                <ul>
+                    <li><strong>Visual patterns emerge:</strong> Some BDs have strong performance across multiple Sales Reps (green columns)</li>
+                    <li><strong>Universal closers identified:</strong> Some Sales Reps show consistent positive performance across many BDs</li>
+                    <li><strong>Specialist patterns:</strong> Some Sales Reps excel with specific BDs but struggle with others</li>
+                    <li><strong>Gaps reveal opportunities:</strong> Red zones highlight where alternative routing is critical</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>What Drives Performance?</h3>
+                <p>Metric contribution analysis: High Performers vs At-Risk Pairs</p>
+            </div>
+            
+            <div class="chart-container">
+                <img src="visualizations/output/05_metric_contributions.png" alt="Metric Contributions">
+            </div>
+            
+            <div class="insights-box">
+                <h4>Key Discovery: Stale Pipeline is the Biggest Differentiator</h4>
+                <ul>
+                    <li><strong>Stale Pipeline Rate:</strong> Largest gap between high performers and at-risk pairs (~30 points)</li>
+                    <li><strong>Win Rate & Early Death:</strong> Also show significant separation (~20-25 points each)</li>
+                    <li><strong>Deal Size:</strong> Smaller variance, indicating BDs pass similar-value opportunities regardless of pairing</li>
+                    <li><strong>Business insight:</strong> Success isn't just about closing or not closing - it's about keeping deals MOVING. High performers maintain momentum and avoid stagnation.</li>
+                </ul>
+            </div>
+            
+            <div style="background: #fff3cd; border-left: 4px solid var(--warning); padding: 20px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="color: #856404; margin-bottom: 12px;">Surprising Finding</h4>
+                <p style="color: #856404; line-height: 1.8;">
+                    I initially expected Win Rate to be the primary differentiator. However, Stale Pipeline Rate showed the largest separation. This suggests that training and coaching should focus on deal momentum management, not just closing techniques. High-performing pairs keep deals progressing decisively rather than letting them languish.
+                </p>
+            </div>
+        </div>
+        
+        <div class="section">
+            <div class="section-header">
+                <h3>Methodology Summary</h3>
+                <p>The complete analytical framework</p>
+            </div>
+            
+            <div style="line-height: 2;">
+                <p><strong>✓ Four Key Metrics Selected:</strong> Win Rate, Early Death, Stale Pipeline, Deal Size (25% each)</p>
+                <p><strong>✓ BD Baseline Comparison:</strong> Controls for lead quality differences across BDs</p>
+                <p><strong>✓ Percentage Deviation Scoring:</strong> Normalizes for difficulty, makes scores comparable</p>
+                <p><strong>✓ Confidence Multiplier Applied:</strong> Accounts for sample size reliability</p>
+                <p><strong>✓ Two-Level Classification:</strong> BD-specific for routing + Population for context</p>
+                <p style="margin-top: 20px;"><strong>→ Ready for Business Recommendations (Dashboard 3)</strong></p>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

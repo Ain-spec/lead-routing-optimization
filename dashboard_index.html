@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BD-Sales Pairing Optimization Analysis</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #00a8cc;
+            --success: #2f855a;
+            --text-dark: #1a202c;
+            --text-light: #4a5568;
+            --bg-light: #f7fafc;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 60px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: var(--text-light);
+            font-size: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+        
+        .overview-section {
+            background: var(--bg-light);
+            border-left: 5px solid var(--accent);
+            padding: 35px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+        }
+        
+        .overview-section h2 {
+            color: var(--primary);
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+        
+        .overview-section p {
+            color: var(--text-dark);
+            line-height: 1.9;
+            margin-bottom: 18px;
+            font-size: 16px;
+            text-align: justify;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 30px 20px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(26, 54, 93, 0.3);
+        }
+        
+        .stat-number {
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .dashboard-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-top: 50px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+            border-color: var(--accent);
+        }
+        
+        .dashboard-card h3 {
+            color: var(--primary);
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .dashboard-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+        
+        .dashboard-icon {
+            font-size: 44px;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-banner {
+            background: linear-gradient(135deg, var(--success) 0%, #38a169 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            margin: 35px 0;
+            text-align: center;
+        }
+        
+        .highlight-banner .big-number {
+            font-size: 52px;
+            font-weight: 700;
+            margin: 12px 0;
+        }
+        
+        .highlight-banner p {
+            font-size: 17px;
+            opacity: 0.95;
+            margin: 8px 0;
+        }
+        
+        .author {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #e2e8f0;
+            color: var(--text-light);
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BD-Sales Pairing Optimization</h1>
+        <p class="subtitle">Intelligent Lead Routing for Maximum Revenue Impact</p>
+        
+        <div class="overview-section">
+            <h2>Project Overview</h2>
+            
+            <p>The goal of this project was to optimize lead routing from Business Development (BD) representatives to Sales representatives by identifying which pairings work most effectively together. In many organizations, leads are assigned randomly or distributed evenly across the sales team, but this approach ignores the reality that not all BD-Sales combinations perform equally. Some pairings naturally excel together while others struggle, and understanding these patterns can dramatically improve conversion rates and revenue outcomes.</p>
+            
+            <p>To address this challenge, I conducted a comprehensive analysis of 2,200+ opportunities across 18 BD reps and 23 Sales reps, resulting in 413 unique pairing combinations. The methodology began by defining four key performance metrics that capture different aspects of sales effectiveness: Win Rate (conversion success), Early Death Rate (qualification quality), Stale Pipeline Rate (deal momentum), and Average Deal Size (revenue impact). Each metric provides unique insights into pairing performance across the entire sales cycle.</p>
+            
+            <p>The critical methodological decision was establishing BD-specific baselines rather than comparing all pairs to a single company-wide average. This approach recognizes that different BDs pass leads of varying quality and difficulty - for example, Enterprise BDs naturally have lower win rates than SMB BDs due to deal complexity. By calculating each BD's average performance across all their sales rep partnerships, I created fair baselines that control for these inherent differences. Each BD-Sales pair was then evaluated using percentage deviation from their BD's baseline, which normalizes performance relative to lead difficulty and makes scores truly comparable.</p>
+            
+            <p>To ensure statistical reliability, I implemented a confidence multiplier based on sample size - pairs with 7+ opportunities received full confidence, while those with 3-6 opportunities received partial weighting, and pairs with fewer than 3 opportunities were excluded entirely. The four metrics were weighted equally at 25% each and combined with the confidence multiplier to produce a final performance score for every pairing. These scores were used at two levels: first, BD-specific rankings identified the top 5 and bottom 5 sales reps for each BD's leads (operational routing decisions), and second, population-wide percentiles classified overall pairing quality across the company (strategic context). The analysis revealed that optimized routing to each BD's top-performing sales reps could generate $600K+ in additional annual recurring revenue - a 50% increase with zero implementation cost, simply by matching leads more intelligently with the right sales talent.</p>
+        </div>
+        
+        <div class="highlight-banner">
+            <p style="font-size: 20px; font-weight: 600; margin-bottom: 12px;">EXPECTED BUSINESS IMPACT</p>
+            <div class="big-number">$600K+</div>
+            <p style="font-size: 18px;">Additional Annual Recurring Revenue (ARR)</p>
+            <p style="margin-top: 15px; font-size: 19px; font-weight: 600;">50% ARR Increase | $0 Implementation Cost</p>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">2,200+</div>
+                <div class="stat-label">Opportunities Analyzed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">413</div>
+                <div class="stat-label">Unique Pairings</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">124</div>
+                <div class="stat-label">Point Performance Swing</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">BDs Analyzed</div>
+            </div>
+        </div>
+        
+        <div style="background: #fff3cd; border-left: 4px solid #d69e2e; padding: 25px; margin: 35px 0; border-radius: 6px;">
+            <h3 style="color: #856404; margin-bottom: 15px; font-size: 20px;">What Makes This Analysis Different?</h3>
+            <p style="color: #856404; line-height: 1.9; margin-bottom: 12px;">
+                <strong>Most analyses compare everyone to a company-wide average.</strong> This is unfair because it doesn't account for lead quality differences. Enterprise BDs passing complex, high-value leads will naturally have lower win rates than SMB BDs passing simple, smaller deals.
+            </p>
+            <p style="color: #856404; line-height: 1.9;">
+                <strong>This analysis uses BD-specific baselines.</strong> Each Sales Rep is judged against others handling THE SAME BD's leads. This controls for lead quality and makes recommendations truly actionable. A Sales Rep performing 30% above their BD's baseline is excellent - regardless of whether that baseline is 18% or 32%.
+            </p>
+        </div>
+        
+        <div class="dashboard-links">
+            <a href="dashboard_1_eda.html" class="dashboard-card">
+                <div class="dashboard-icon">📊</div>
+                <h3>Dashboard 1: EDA</h3>
+                <p>Exploratory data analysis, data quality validation, and confidence threshold establishment</p>
+            </a>
+            
+            <a href="dashboard_2_methodology.html" class="dashboard-card">
+                <div class="dashboard-icon">🔬</div>
+                <h3>Dashboard 2: Analysis</h3>
+                <p>Performance scoring methodology, metric contributions, and classification results</p>
+            </a>
+            
+            <a href="dashboard_3_recommendations.html" class="dashboard-card">
+                <div class="dashboard-icon">🎯</div>
+                <h3>Dashboard 3: Recommendations</h3>
+                <p>BD-specific routing guidance, decision matrix, and quantified ARR impact</p>
+            </a>
+        </div>
+        
+        <div class="author">
+            <p><strong>Created by Ain</strong> | Data Analytics Portfolio Project</p>
+            <p style="margin-top: 8px;">Python | pandas | Statistical Analysis | Data Visualization | Business Impact Quantification</p>
+        </div>
+    </div>
+</body>
+</html>
