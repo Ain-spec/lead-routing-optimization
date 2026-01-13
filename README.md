@@ -6,6 +6,15 @@ A comprehensive data analytics project analyzing Business Development and Sales 
 ![Status](https://img.shields.io/badge/Status-Complete-success.svg)
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 
+## 🌐 Live Interactive Dashboards
+
+**[👉 View Live Dashboards](https://ain-spec.github.io/lead-routing-optimization/)**
+
+Explore the complete analysis through three interactive dashboards:
+- **Dashboard 1:** Exploratory Data Analysis & Data Validation
+- **Dashboard 2:** Performance Methodology & Analysis Results
+- **Dashboard 3:** Business Recommendations & $600K+ ARR Impact
+
 ## 📊 Project Overview
 
 This project analyzes 2,200+ opportunities across 18 BD reps and 23 Sales reps (413 unique pairings) to identify optimal BD-Sales team pairings and provide data-driven routing recommendations.
@@ -329,3 +338,4 @@ Reach out via [LinkedIn](https://www.linkedin.com/in/qurat-ul-ain-236b60133/) or
 
 
 **Last Updated**: January 2026
+
